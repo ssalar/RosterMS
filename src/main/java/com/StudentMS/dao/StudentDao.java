@@ -24,9 +24,9 @@ public interface StudentDao {
     List<Student> listStudents();
     
     //Update
-    int updateStudentById();
+    int updateStudent(Student student);
     
     //Delete
-    int deleteStudentById();
+    int deleteStudentById(int id);
     
 }
