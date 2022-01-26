@@ -1,5 +1,6 @@
 package com.StudentMS.dao;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,16 +37,29 @@ public class StudentDaoImpl implements StudentDao {
 	}
 
 	@Override
-	public int updateStudentById() {
+	public int updateStudent(Student student) {
 		// TODO Auto-generated method stub
+		for(Student updstudent: students) {
+			if(updstudent.getId()== student.getId()) {
+				
+				updstudent.setFirstName(student.getFirstName());
+				updstudent.setLastName(student.getLastName());
+				
+			}
+			
+		}
+		
 		return 0;
 	}
 
 	@Override
-	public int deleteStudentById() {
+	public int deleteStudentById(int id) {
 		// TODO Auto-generated method stub
+		
+		Student delStudent = getStudentById(id);
+		students.remove(delStudent);
+		
 		return 0;
-	}
-
+  }
+  
 }
-
