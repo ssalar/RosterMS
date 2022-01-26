@@ -7,6 +7,7 @@ package com.StudentMS.dao;
 import com.StudentMS.models.Course;
 import com.StudentMS.models.Student;
 import com.StudentMS.models.Teacher;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,25 +15,39 @@ import java.util.List;
  * @author ssalar
  */
 public class CourseDaoImpl implements CourseDao{
-
+    
+        private List<Course> courses = new ArrayList<>();
+        
     @Override
     public Course getCourseById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        for (Course course : courses){
+            if (course.getId() == id){
+                return course;
+            }
+        }
+        
+        return null;
     }
 
     @Override
     public List<Course> getAllCourses() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return courses;
     }
 
     @Override
     public Course addCourse(Course course) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Course newCourse = new Course(course.getId(), course.getName(), course.getDescription(), course.getTeacher(), course.getStudents());
+        courses.add(newCourse);
+        
+        return newCourse;
     }
 
     @Override
     public void updateCourse(Course course) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        getCourseById()
+        
     }
 
     @Override

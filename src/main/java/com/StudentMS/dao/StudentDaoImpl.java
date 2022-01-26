@@ -1,5 +1,4 @@
 package com.StudentMS.dao;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +55,4 @@ public class StudentDaoImpl implements StudentDao{
 		students.remove(delStudent);
 		
 		return 0;
-	}
-	
-    
-}
+  }
