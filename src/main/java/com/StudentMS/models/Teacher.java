@@ -4,54 +4,59 @@
  */
 package com.StudentMS.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
-    /**
-     *
-     * @author sindhu
-     */
-    public class Teacher {
-        private int id;
-        private String firstname;
-        private String lastname;
-        private String speciality;
+/**
+ *
+ * @author sindhu
+ */
+public class Teacher {
+    private int id;
+    private String firstname;
+    private String lastname;
+    private String speciality;
 
-        public Teacher(int id, String firstname, String lastname, String speciality) {
-            this.id = id;
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.speciality = speciality;
-        }
+    public Teacher(@JsonProperty("id") int id,
+                   @JsonProperty("firstname") String firstname,
+                   @JsonProperty("lastname")String lastname,
+                   @JsonProperty("speciality")String speciality) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.speciality = speciality;
+    }
 
-        public int getId() {
-            return id;
-        }
+    public int getId() {
+        return id;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        public String getFirstName() {
-            return firstname;
-        }
+    public String getFirstName() {
+        return firstname;
+    }
 
-        public void setFirstName(String Firstname) {
-            this.firstname = firstname;
-        }
+    public void setFirstName(String Firstname) {
+        this.firstname = firstname;
+    }
 
-        public String getLastName() {
-            return lastname;
-        }
+    public String getLastName() {
+        return lastname;
+    }
 
-        public void setLastName(String Lastname) {
-            this.lastname = lastname;
-        }
+    public void setLastName(String Lastname) {
+        this.lastname = lastname;
+    }
 
-        public String getSpeciality() {
-            return speciality;
-        }
+    public String getSpeciality() {
+        return speciality;
+    }
 
-        public void setSpeciality(String Lastname) {
-            this.speciality = speciality;
-        }
+    public void setSpeciality(String Lastname) {
+        this.speciality = speciality;
+    }
 }
