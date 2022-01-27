@@ -4,7 +4,9 @@ import com.StudentMS.dao.TeacherDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("api/v1/person")
+import java.util.List;
+
+@RequestMapping("api/v1/teacher")
 @RestController
 public class TeacherController {
 
@@ -15,19 +17,20 @@ public class TeacherController {
         this.teacherDoaImpl = teacherDaoImpl;
     }
 
-    @GetMapping
+    /*@GetMapping
     public void getTeacherById(@RequestBody int id){
         teacherDoaImpl.getTeacherById(id);
-    }
+    }*/
 
     @GetMapping
-    public void getAllTeachers(){
-        teacherDoaImpl.getAllTeachers();
+    public List<Teacher> getAllTeachers(){
+
+        return teacherDoaImpl.getAllTeachers();
     }
 
     @PostMapping
-    public void addTeacher(@RequestBody Teacher teacher){
-        teacherDoaImpl.addTeacher(teacher);
+    public Teacher addTeacher(@RequestBody Teacher teacher){
+        return teacherDoaImpl.addTeacher(teacher);
     }
 
     @PutMapping
