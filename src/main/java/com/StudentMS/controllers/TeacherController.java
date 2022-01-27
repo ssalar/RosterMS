@@ -17,29 +17,28 @@ public class TeacherController {
         this.teacherDoaImpl = teacherDaoImpl;
     }
 
-    /*@GetMapping
-    public void getTeacherById(@RequestBody int id){
-        teacherDoaImpl.getTeacherById(id);
-    }*/
+    @GetMapping(path = "{id}")
+    public Teacher getTeacherById(@PathVariable("id") int id) {
+        return teacherDoaImpl.getTeacherById(id);
+    }
 
     @GetMapping
-    public List<Teacher> getAllTeachers(){
-
+    public List<Teacher> getAllTeachers() {
         return teacherDoaImpl.getAllTeachers();
     }
 
     @PostMapping
-    public Teacher addTeacher(@RequestBody Teacher teacher){
+    public Teacher addTeacher(@RequestBody Teacher teacher) {
         return teacherDoaImpl.addTeacher(teacher);
     }
 
-    @PutMapping
-    public void updateTeacher(@RequestBody Teacher teacher, int id){
-        teacherDoaImpl.updateTeacher(teacher, id);
+    @PutMapping(path = "{id}")
+    public Teacher updateTeacher(@RequestBody Teacher teacher, @PathVariable("id") int id) {
+        return teacherDoaImpl.updateTeacher(teacher, id);
     }
 
-    @DeleteMapping
-    public void deleteTeacherById(@RequestBody int id){
+    @DeleteMapping(path = "{id}")
+    public void deleteTeacherById(@PathVariable("id") int id){
         teacherDoaImpl.deleteTeacherById(id);
     }
 }

@@ -9,20 +9,22 @@ import com.StudentMS.models.Student;
 import com.StudentMS.models.Teacher;
 import org.springframework.stereotype.Repository;
 
+import java.util.*;/*
 import java.util.List;
-import java.util.ArrayList;
+import java.util.ArrayList;*/
 
 /**
  *
  * @author sindhu
  */
 @Repository
-public class TeacherDaoImpl implements TeacherDao{
+public class TeacherDaoImpl implements TeacherDao {
     private List<Teacher> teachers = new ArrayList<>();
+
     @Override
     public Teacher getTeacherById(int id) {
-        for(Teacher teacher : teachers){
-            if(teacher.getId() == id){
+        for (Teacher teacher : teachers) {
+            if (teacher.getId() == id) {
                 return teacher;
             }
         }
@@ -36,29 +38,32 @@ public class TeacherDaoImpl implements TeacherDao{
 
     @Override
     public Teacher addTeacher(Teacher teacher) {
-        Teacher newTeacher = new Teacher(teacher.getId(), teacher.getFirstName(), teacher.getLastName(), teacher.getSpeciality());
+        Teacher newTeacher = new Teacher(teacher.getId(), teacher.getFirstname(), teacher.getLastname(), teacher.getSpeciality());
         teachers.add(newTeacher);
         return newTeacher;
     }
 
     @Override
-    public void updateTeacher(Teacher teacher, int id) {
-        for(Teacher currentTeacher : teachers) {
-            if(currentTeacher.getId() == id){
-                currentTeacher.setFirstName(teacher.getFirstName());
-                currentTeacher.setLastName(teacher.getLastName());
-                currentTeacher.setSpeciality(teacher.getSpeciality());
+    public Teacher updateTeacher(Teacher teacher, int id) {
+        for (Teacher currTeacher : teachers) {
+            if (currTeacher.getId() == id) {
+                currTeacher.setFirstname(teacher.getFirstname());
+                currTeacher.setLastname(teacher.getLastname());
+                currTeacher.setSpeciality(teacher.getSpeciality());
+                return currTeacher;
             }
         }
+        return null;
     }
 
     @Override
-    public void deleteTeacherById(int id) {
+    public int deleteTeacherById(int id) {
         for(Teacher teacher : teachers){
             if(teacher.getId() == id) {
                 teachers.remove(teacher);
+                return 1;
             }
         }
+        return 0;
     }
-
 }

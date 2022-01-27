@@ -6,7 +6,7 @@ package com.StudentMS.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -36,19 +36,19 @@ public class Teacher {
         this.id = id;
     }
 
-    public String getFirstName() {
+    public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstName(String Firstname) {
+    public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
-    public String getLastName() {
+    public String getLastname() {
         return lastname;
     }
 
-    public void setLastName(String Lastname) {
+    public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
@@ -56,7 +56,10 @@ public class Teacher {
         return speciality;
     }
 
-    public void setSpeciality(String Lastname) {
+    public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
+
+
+
 }
