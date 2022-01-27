@@ -46,7 +46,7 @@ public class CourseDaoImpl implements CourseDao{
     @Override
     public void updateCourse(Course course) {
         
-        getCourseById()
+        getCourseById();
         
     }
 
