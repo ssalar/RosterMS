@@ -9,14 +9,16 @@ import com.StudentMS.models.Student;
 import com.StudentMS.models.Teacher;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author ssalar
  */
+@Repository
 public class CourseDaoImpl implements CourseDao{
     
-        private List<Course> courses = new ArrayList<>();
+    private List<Course> courses = new ArrayList<>();
         
     @Override
     public Course getCourseById(int id) {
@@ -45,14 +47,15 @@ public class CourseDaoImpl implements CourseDao{
 
     @Override
     public void updateCourse(Course course) {
-
         for (Course curr: courses){
             if (curr.getId() == course.getId()){
                 curr.setName(course.getName());
                 curr.setDescription(course.getDescription());
             }
+
         }
-    }
+
+    }  
 
     @Override
     public void deleteCourseById(int id) {
