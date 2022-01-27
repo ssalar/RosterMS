@@ -45,14 +45,19 @@ public class CourseDaoImpl implements CourseDao{
 
     @Override
     public void updateCourse(Course course) {
-        
-        getCourseById()
-        
+
+        for (Course curr: courses){
+            if (curr.getId() == course.getId()){
+                curr.setName(course.getName());
+                curr.setDescription(course.getDescription());
+            }
+        }
     }
 
     @Override
     public void deleteCourseById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Course delete = getCourseById(id);
+        courses.remove(delete);
     }
 
     @Override
