@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 @Repository
 public class TeacherDaoImpl implements TeacherDao{
-private List<Teacher> teachers = new ArrayList<>();
+    private List<Teacher> teachers = new ArrayList<>();
     @Override
     public Teacher getTeacherById(int id) {
         for(Teacher teacher : teachers){
@@ -36,9 +36,9 @@ private List<Teacher> teachers = new ArrayList<>();
 
     @Override
     public Teacher addTeacher(Teacher teacher) {
-       Teacher newTeacher = new Teacher(teacher.getId(), teacher.getFirstName(), teacher.getLastName(), teacher.getSpeciality());
-       teachers.add(newTeacher);
-       return newTeacher;
+        Teacher newTeacher = new Teacher(teacher.getId(), teacher.getFirstName(), teacher.getLastName(), teacher.getSpeciality());
+        teachers.add(newTeacher);
+        return newTeacher;
     }
 
     @Override
