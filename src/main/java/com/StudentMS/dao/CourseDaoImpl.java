@@ -47,14 +47,15 @@ public class CourseDaoImpl implements CourseDao{
 
     @Override
     public void updateCourse(Course course) {
-        
         for (Course curr: courses){
             if (curr.getId() == course.getId()){
                 curr.setName(course.getName());
                 curr.setDescription(course.getDescription());
             }
-        }  
-    }
+
+        }
+
+    }  
 
     @Override
     public void deleteCourseById(int id) {

@@ -4,6 +4,8 @@
  */
 package com.StudentMS.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
     /**
@@ -16,7 +18,10 @@ import java.util.List;
         private String lastname;
         private String speciality;
 
-        public Teacher(int id, String firstname, String lastname, String speciality) {
+        public Teacher(@JsonProperty("id") int id,
+                       @JsonProperty("firstname") String firstname,
+                       @JsonProperty("lastname")String lastname,
+                       @JsonProperty("speciality")String speciality) {
             this.id = id;
             this.firstname = firstname;
             this.lastname = lastname;
