@@ -49,5 +49,9 @@ public class StudentController {
 		return studentDaoImpl.deleteStudentById(id);
 		
 	}
+	@PutMapping
+	public int updateStudents(@RequestBody Student student) {
+		return studentDaoImpl.updateStudent(student);
+	}
 
 }
