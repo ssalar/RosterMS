@@ -1,4 +1,4 @@
-package com.StudentMS.api;
+package com.StudentMS.controllers;
 
 import java.util.List;
 
