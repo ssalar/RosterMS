@@ -20,8 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/course")
 public class CourseController {
     
+   
+    CourseDao coursedao;
+    
     @Autowired
-    private CourseDao coursedao;
+    public CourseController(CourseDao coursedao){
+        this.coursedao = coursedao;
+    }
     
     @PostMapping
     public void addCourse(@RequestBody Course course){
