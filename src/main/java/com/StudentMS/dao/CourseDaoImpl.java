@@ -46,10 +46,10 @@ public class CourseDaoImpl implements CourseDao{
     }
 
     @Override
-    public void updateCourse(Course course) {
+    public void updateCourse(Course course, int id) {
         
         for (Course curr: courses){
-            if (curr.getId() == course.getId()){
+            if (curr.getId() == id){
                 curr.setName(course.getName());
                 curr.setDescription(course.getDescription());
             }
