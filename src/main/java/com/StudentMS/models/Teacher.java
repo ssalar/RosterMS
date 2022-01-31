@@ -28,6 +28,10 @@ public class Teacher {
         this.speciality = speciality;
     }
 
+    public Teacher() {
+        
+    }
+
     public int getId() {
         return id;
     }
