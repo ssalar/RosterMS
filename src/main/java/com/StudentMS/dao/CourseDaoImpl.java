@@ -16,6 +16,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+
+
 /**
  *
  * @author ssalar
@@ -71,19 +73,19 @@ public class CourseDaoImpl implements CourseDao{
     public Course addCourse(Course course) {
         Course newCourse = new Course(course.getId(), course.getName(), course.getDescription(), course.getTeacher(), course.getStudents());
         courses.add(newCourse);
-        
+
         return newCourse;
     }
 
     @Override
     public void updateCourse(Course course, int id) {
-        
-        for (Course curr: courses){
-            if (curr.getId() == id){
+
+        for (Course curr : courses) {
+            if (curr.getId() == id) {
                 curr.setName(course.getName());
                 curr.setDescription(course.getDescription());
             }
-        }  
+        }
     }
 
     @Override
@@ -101,18 +103,39 @@ public class CourseDaoImpl implements CourseDao{
     public List<Course> getCoursesForStudent(Student student) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     public class CourseMapper implements RowMapper<Course> {
         public Course mapRow(ResultSet rs, int rowNum) throws SQLException {
-           Course course = new Course();
-           course.setId(rs.getInt("id"));
-           course.setName(rs.getString("name"));
-           course.setDescription(rs.getString("description"));
-           
-           return course;
+            Course course = new Course();
+            course.setId(rs.getInt("id"));
+            course.setName(rs.getString("name"));
+            course.setDescription(rs.getString("description"));
+            return course;
         }
     }
 
-    
-    
+    public class StudentMapper implements RowMapper<Student> {
+        public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Student student = new Student();
+            student.setId(rs.getInt("id"));
+            student.setFirstName(rs.getString("firstName"));
+            student.setLastName(rs.getString("lastName"));
+            return student;
+
+
+        }
+    }
+
+    public class TeacherMapper implements RowMapper<Teacher> {
+        public Teacher mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Teacher teacher = new Teacher();
+            teacher.setId(rs.getInt("id"));
+            teacher.setFirstname(rs.getString("firstName"));
+            teacher.setLastname(rs.getString("lastName"));
+            teacher.setSpeciality(rs.getString("speciality"));
+
+            return teacher;
+        }
+    }
+
 }
