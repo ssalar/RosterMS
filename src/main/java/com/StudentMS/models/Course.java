@@ -17,10 +17,6 @@ public class Course {
     private String description;
     private Teacher teacher;
     private List<Student> students;
-    
-    public Course(){
-        
-    }
 
     public Course(@JsonProperty("id") int id, 
                   @JsonProperty("name") String name, 

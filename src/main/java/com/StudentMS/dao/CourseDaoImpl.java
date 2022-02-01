@@ -36,28 +36,29 @@ public class CourseDaoImpl implements CourseDao{
         
         Course course = jdbc.queryForObject(GET_COURSE_BY_ID, new CourseMapper(), id);
         
-        course.setTeacher(teacher);
-        course.setStudents(students);
+        course.setTeacher(getTeacherForCourse(id));
+        course.setStudents(getAllStudentsForCourse(id));
         
-//        for (Course course : courses){
-//            if (course.getId() == id){
-//                return course;
-//            }
-//        }
-//        
       return course;
     }
     
-    public Teacher getTeacherByID(int id){
-        String GET_TEACHER = "SELECT * FROM Teacher WHERE id = ?";
+    public Teacher getTeacherForCourse(int id){
+        String GET_TEACHER = "SELECT t.* FROM teacher t"+
+                             "JOIN course c ON c.teacherId = t.id WHERE c.id = ?";
         
-        Teacher teacher = jdbc.queryForObject(GET_TEACHER, teacherMapper, id);
+        Teacher teacher = jdbc.queryForObject(GET_TEACHER, new TeacherMapper(), id);
         
         return teacher;
     }
     
-    public List<Student> getAllStudents(){
-        String GET_ALL_STUDENTS = "";
+    public List<Student> getAllStudentsForCourse(int id){
+        String GET_ALL_STUDENTS = "SELECT s.* FROM Student s"+
+                                  "JOIN course_student cs ON  cs.studentId = s.id WHERE cs.courseID = ?";
+        
+        List<Student> student_list = jdbc.query(GET_ALL_STUDENTS,  new StudentMapper(), id);
+        
+        return student_list;
+        
     }
 
     @Override
@@ -66,32 +67,33 @@ public class CourseDaoImpl implements CourseDao{
 //        List<Course> courses = jdbc.queryForList(GET_ALL_COURSES);
         
 //        return courses;
+        return null;
         
     }
 
     @Override
     public Course addCourse(Course course) {
-        Course newCourse = new Course(course.getId(), course.getName(), course.getDescription(), course.getTeacher(), course.getStudents());
-        courses.add(newCourse);
+//        Course newCourse = new Course(course.getId(), course.getName(), course.getDescription(), course.getTeacher(), course.getStudents());
+//        courses.add(newCourse);
 
-        return newCourse;
+        return null;
     }
 
     @Override
     public void updateCourse(Course course, int id) {
 
-        for (Course curr : courses) {
-            if (curr.getId() == id) {
-                curr.setName(course.getName());
-                curr.setDescription(course.getDescription());
-            }
-        }
+//        for (Course curr : courses) {
+//            if (curr.getId() == id) {
+//                curr.setName(course.getName());
+//                curr.setDescription(course.getDescription());
+//            }
+//        }
     }
 
     @Override
     public void deleteCourseById(int id) {
-        Course delete = getCourseById(id);
-        courses.remove(delete);
+//        Course delete = getCourseById(id);
+//        courses.remove(delete);
     }
 
     @Override
