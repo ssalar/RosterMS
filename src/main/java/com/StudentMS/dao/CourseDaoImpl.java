@@ -64,9 +64,9 @@ public class CourseDaoImpl implements CourseDao{
     @Override
     public List<Course> getAllCourses() {
         //String GET_ALL_COURSES = "SELCTE * FROM Course";
-//        List<Course> courses = jdbc.queryForList(GET_ALL_COURSES);
+        //List<Course> courses = jdbc.queryForList(GET_ALL_COURSES);
         
-//        return courses;
+        //return courses;
         return null;
         
     }
