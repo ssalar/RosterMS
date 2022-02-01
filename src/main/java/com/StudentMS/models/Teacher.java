@@ -20,8 +20,8 @@ public class Teacher {
 
     public Teacher(@JsonProperty("id") int id,
                    @JsonProperty("firstname") String firstname,
-                   @JsonProperty("lastname")String lastname,
-                   @JsonProperty("speciality")String speciality) {
+                   @JsonProperty("lastname") String lastname,
+                   @JsonProperty("speciality") String speciality) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -29,7 +29,7 @@ public class Teacher {
     }
 
     public Teacher() {
-        
+
     }
 
     public int getId() {
@@ -63,7 +63,6 @@ public class Teacher {
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
-
 
 
 }

@@ -32,7 +32,7 @@ public class CourseDaoImpl implements CourseDao{
     @Override
     public Course getCourseById(int id) {
         
-        String GET_COURSE_BY_ID = "SELECT * FROM Course WHERE id = ?";
+        String GET_COURSE_BY_ID = "SELECT * FROM course WHERE id = ?";
         
         Course course = jdbc.queryForObject(GET_COURSE_BY_ID, new CourseMapper(), id);
         
@@ -43,7 +43,7 @@ public class CourseDaoImpl implements CourseDao{
     }
     
     public Teacher getTeacherForCourse(int id){
-        String GET_TEACHER = "SELECT t.* FROM teacher t"+
+        String GET_TEACHER = "SELECT t.* FROM teacher t "+
                              "JOIN course c ON c.teacherId = t.id WHERE c.id = ?";
         
         Teacher teacher = jdbc.queryForObject(GET_TEACHER, new TeacherMapper(), id);
@@ -52,7 +52,7 @@ public class CourseDaoImpl implements CourseDao{
     }
     
     public List<Student> getAllStudentsForCourse(int id){
-        String GET_ALL_STUDENTS = "SELECT s.* FROM Student s"+
+        String GET_ALL_STUDENTS = "SELECT s.* FROM student s "+
                                   "JOIN course_student cs ON  cs.studentId = s.id WHERE cs.courseID = ?";
         
         List<Student> student_list = jdbc.query(GET_ALL_STUDENTS,  new StudentMapper(), id);
@@ -63,11 +63,15 @@ public class CourseDaoImpl implements CourseDao{
 
     @Override
     public List<Course> getAllCourses() {
-        //String GET_ALL_COURSES = "SELCTE * FROM Course";
-//        List<Course> courses = jdbc.queryForList(GET_ALL_COURSES);
-        
-//        return courses;
-        return null;
+       String GET_ALL_COURSES = "SELECT * FROM course " ;
+
+       List<Course> course_list = jdbc.query (GET_ALL_COURSES, new CourseMapper());
+
+       for (Course course :course_list){
+           course.setTeacher(getTeacherForCourse(course.getId()));
+           course.setStudents(getAllStudentsForCourse((course.getId())));
+       }
+        return course_list;
         
     }
 
