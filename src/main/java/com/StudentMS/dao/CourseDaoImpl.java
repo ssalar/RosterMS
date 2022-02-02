@@ -92,8 +92,13 @@ public class CourseDaoImpl implements CourseDao{
 
     @Override
     public void deleteCourseById(int id) {
-//        Course delete = getCourseById(id);
-//        courses.remove(delete);
+        String DELETE_COURSE_STUDENT = "DELETE FROM course_student WHERE courseId = ?";
+        
+        jdbc.update(DELETE_COURSE_STUDENT, id);
+        
+        String DELETE_COURSE = "DELETE FROM course WHERE id = ?";
+        
+        jdbc.update(DELETE_COURSE, id);
     }
 
     @Override
