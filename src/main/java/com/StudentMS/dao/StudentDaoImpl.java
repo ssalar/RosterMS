@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.StudentMS.models.Student;
 
@@ -26,7 +27,9 @@ public class StudentDaoImpl implements StudentDao {
 		
 		String 	ADD_STUDENT = "INSERT INTO student(id,firstName,lastName) VALUES(?,?,?)";
 		
-	    return jdbc.update(ADD_STUDENT,student.getId(),student.getFirstName(),student.getLastName());
+	    jdbc.update(ADD_STUDENT,student.getId(),student.getFirstName(),student.getLastName());
+	    
+	    return 1;
 		
 		
 	}
@@ -89,11 +92,17 @@ public class StudentDaoImpl implements StudentDao {
 	}
 
 	@Override
+	@Transactional
 	public int deleteStudentById(int id) {
 		
+		String COURSE_STUDENT_DELETE = "DELETE FROM course_student where studentId = ?";
 		String DELETE_STUDENT = "DELETE from student where id =? ";
 		
+		jdbc.update(COURSE_STUDENT_DELETE,id);
+		
 		int status = jdbc.update(DELETE_STUDENT, id);
+		
+		
 		// TODO Auto-generated method stub
 //		
 //		Student delStudent = getStudentById(id);

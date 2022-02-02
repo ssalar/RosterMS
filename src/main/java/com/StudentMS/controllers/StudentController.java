@@ -50,8 +50,8 @@ public class StudentController {
 		return studentDao.deleteStudentById(id);
 		
 	}
-	@PutMapping
-	public int updateStudents(@RequestBody Student student) {
+	@PutMapping(path = "{id}")
+	public int updateStudents(@PathVariable("id") int id, @RequestBody Student student) {
 		return studentDao.updateStudent(student);
 	}
 }
