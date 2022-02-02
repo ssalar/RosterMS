@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -75,10 +75,18 @@ public class CourseDaoImpl implements CourseDao{
     }
 
     @Override
+    @Transactional
     public Course addCourse(Course course) {
-        String ADD_COURSE = "INSERT INTO course ";
+        String ADD_COURSE = "INSERT INTO course (name,description,teacherid) VALUES (?,?,?) ";
+        String Insert_CourseStudent = "INSERT INTO course_student (courseid,studentid) VALUES (?,?)";
 
-        Course add_Course = (Course) jdbc.query(ADD_COURSE,new CourseMapper());
+        jdbc.update(ADD_COURSE,course.getName(),course.getDescription(),course.getTeacher().getId());
+
+        for (Student student: course.getStudents() ){
+            jdbc.update (Insert_CourseStudent,course.getId(),student.getId());
+        }
+
+
 
 
         return course;
