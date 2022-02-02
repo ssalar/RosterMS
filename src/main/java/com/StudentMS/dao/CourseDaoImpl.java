@@ -9,7 +9,6 @@ import com.StudentMS.models.Student;
 import com.StudentMS.models.Teacher;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -77,10 +76,12 @@ public class CourseDaoImpl implements CourseDao{
 
     @Override
     public Course addCourse(Course course) {
-//        Course newCourse = new Course(course.getId(), course.getName(), course.getDescription(), course.getTeacher(), course.getStudents());
-//        courses.add(newCourse);
+        String ADD_COURSE = "INSERT INTO course ";
 
-        return null;
+        Course add_Course = (Course) jdbc.query(ADD_COURSE,new CourseMapper());
+
+
+        return course;
     }
 
     @Override
