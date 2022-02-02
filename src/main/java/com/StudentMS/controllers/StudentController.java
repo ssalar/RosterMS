@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.StudentMS.dao.StudentDao;
 import com.StudentMS.dao.StudentDaoImpl;
 import com.StudentMS.models.Student;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,42 +17,42 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("api/Student")
+@RequestMapping("api/v1/Student")
 public class StudentController {
     
-    private  StudentDaoImpl studentDaoImpl;
+    private  StudentDao studentDao;
 	
         @Autowired
-	public StudentController(StudentDaoImpl studentDaoImpl) {
+	public StudentController(StudentDao studentDao) {
 		super();
-		this.studentDaoImpl = studentDaoImpl;
+		this.studentDao = studentDao;
 	}
 	
 	@PostMapping
-	public Student insertStudent(@RequestBody Student student) {
-		return studentDaoImpl.addStudent(student);
+	public int insertStudent(@RequestBody Student student) {
+		return studentDao.addStudent(student);
 	}
 	
 	@GetMapping
 	public List<Student> getStudents() {
-		return studentDaoImpl.listStudents();
+		return studentDao.listStudents();
 		
 	}
 	@GetMapping(path = "{id}")
 	public Student getStudentById(@PathVariable("id") int id) {
 		
-		return studentDaoImpl.getStudentById(id);
+		return studentDao.getStudentById(id);
 		
 		
 	}
 	@DeleteMapping(path = "{id}")
 	public int deleteStudentById(@PathVariable("id") int id) {
-		return studentDaoImpl.deleteStudentById(id);
+		return studentDao.deleteStudentById(id);
 		
 	}
 	@PutMapping
 	public int updateStudents(@RequestBody Student student) {
-		return studentDaoImpl.updateStudent(student);
+		return studentDao.updateStudent(student);
 	}
 }
 
