@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 
 
@@ -32,7 +33,7 @@ public class CourseDaoImpl implements CourseDao{
     @Override
     public Course getCourseById(int id) {
         
-        String GET_COURSE_BY_ID = "SELECT * FROM Course WHERE id = ?";
+        String GET_COURSE_BY_ID = "SELECT * FROM course WHERE id = ?";
         
         Course course = jdbc.queryForObject(GET_COURSE_BY_ID, new CourseMapper(), id);
         
@@ -43,7 +44,7 @@ public class CourseDaoImpl implements CourseDao{
     }
     
     public Teacher getTeacherForCourse(int id){
-        String GET_TEACHER = "SELECT t.* FROM teacher t"+
+        String GET_TEACHER = "SELECT t.* FROM teacher t "+
                              "JOIN course c ON c.teacherId = t.id WHERE c.id = ?";
         
         Teacher teacher = jdbc.queryForObject(GET_TEACHER, new TeacherMapper(), id);
@@ -52,7 +53,7 @@ public class CourseDaoImpl implements CourseDao{
     }
     
     public List<Student> getAllStudentsForCourse(int id){
-        String GET_ALL_STUDENTS = "SELECT s.* FROM Student s"+
+        String GET_ALL_STUDENTS = "SELECT s.* FROM student s "+
                                   "JOIN course_student cs ON  cs.studentId = s.id WHERE cs.courseID = ?";
         
         List<Student> student_list = jdbc.query(GET_ALL_STUDENTS,  new StudentMapper(), id);
@@ -80,17 +81,21 @@ public class CourseDaoImpl implements CourseDao{
     }
 
     @Override
+    @Transactional
     public void updateCourse(Course course, int id) {
+        String UPDATE_COURSE = "UPDATE course SET id = ?, name = ?, description = ?, teacherId = ? "+
+                               "WHERE id = ?";
+        
+        jdbc.update(UPDATE_COURSE,
+                    course.getId(),
+                    course.getName(),
+                    course.getDescription(),
+                    course.getTeacher().getId(), id);
 
-//        for (Course curr : courses) {
-//            if (curr.getId() == id) {
-//                curr.setName(course.getName());
-//                curr.setDescription(course.getDescription());
-//            }
-//        }
     }
 
     @Override
+    @Transactional
     public void deleteCourseById(int id) {
         String DELETE_COURSE_STUDENT = "DELETE FROM course_student WHERE courseId = ?";
         
