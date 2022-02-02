@@ -83,6 +83,10 @@ public class CourseDaoImpl implements CourseDao{
     @Override
     @Transactional
     public void updateCourse(Course course, int id) {
+        
+        final String DELETE_COURSE_STUDENT = "DELETE FROM course_student WHERE courseId = ?";
+        jdbc.update(DELETE_COURSE_STUDENT, course.getId());
+        
         String UPDATE_COURSE = "UPDATE course SET id = ?, name = ?, description = ?, teacherId = ? "+
                                "WHERE id = ?";
         
@@ -91,6 +95,15 @@ public class CourseDaoImpl implements CourseDao{
                     course.getName(),
                     course.getDescription(),
                     course.getTeacher().getId(), id);
+        
+        final String INSERT_COURSE_STUDENT = "INSERT INTO "
+                + "course_student(courseId, studentId) VALUES(?,?)";
+        
+        for(Student student : course.getStudents()) {
+            jdbc.update(INSERT_COURSE_STUDENT, 
+                    course.getId(),
+                    student.getId());
+        }
 
     }
 
