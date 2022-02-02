@@ -29,7 +29,7 @@ public class StudentController {
 	}
 	
 	@PostMapping
-	public Student insertStudent(@RequestBody Student student) {
+	public int insertStudent(@RequestBody Student student) {
 		return studentDao.addStudent(student);
 	}
 	

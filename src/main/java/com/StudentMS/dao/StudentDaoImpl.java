@@ -22,13 +22,13 @@ public class StudentDaoImpl implements StudentDao {
 	JdbcTemplate jdbc;
 
 	@Override
-	public Student addStudent(Student student) {
+	public int addStudent(Student student) {
 		
-		//String 	NEW_STUDENT = "INSERT INTO student VALUES()"
-//		Student newstudent = new Student(student.getId(),student.getFirstName(),student.getLastName());
-//		students.add(newstudent);
-//		return newstudent;
-		return null;
+		String 	ADD_STUDENT = "INSERT INTO student(id,firstName,lastName) VALUES(?,?,?)";
+		
+	    return jdbc.update(ADD_STUDENT,student.getId(),student.getFirstName(),student.getLastName());
+		
+		
 	}
 
 	@Override
@@ -64,7 +64,16 @@ public class StudentDaoImpl implements StudentDao {
 	@Override
 	public int updateStudent(Student student) {
 		
-		//String update_student = "UPDATE student SET id= ? "
+		String UPDATE_STUDENT = "UPDATE student SET firstName = ? where id = ?";
+		
+		int status = jdbc.update(UPDATE_STUDENT,student.getFirstName());
+		
+//		if(status!=0) {
+//			System.out.println("Student data updated for ID " +student.getId());
+//		}
+//		else{
+//		      System.out.println("No student found with ID " + student.getId());
+		//String update_studen = "UPDATE student SET id= ? "
 		// TODO Auto-generated method stub
 //		for(Student updstudent: students) {
 //			if(updstudent.getId()== student.getId()) {
@@ -76,7 +85,7 @@ public class StudentDaoImpl implements StudentDao {
 //			
 //		}
 //		
-		return 0;
+		return status;
 	}
 
 	@Override

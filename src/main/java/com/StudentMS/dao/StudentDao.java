@@ -15,7 +15,7 @@ public interface StudentDao {
     
     //Crud
     //Create
-    Student addStudent(Student student);
+    int addStudent(Student student);
     
     //Read
     Student getStudentById(int id);
