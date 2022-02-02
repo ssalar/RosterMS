@@ -64,9 +64,9 @@ public class StudentDaoImpl implements StudentDao {
 	@Override
 	public int updateStudent(Student student) {
 		
-		String UPDATE_STUDENT = "UPDATE student SET firstName = ? where id = ?";
+		String UPDATE_STUDENT = "UPDATE student SET firstName = ?, lastName = ?  where id = ?";
 		
-		int status = jdbc.update(UPDATE_STUDENT,student.getFirstName(),student.getId());
+		int status = jdbc.update(UPDATE_STUDENT,student.getFirstName(),student.getLastName(),student.getId());
 		
 //		if(status!=0) {
 //			System.out.println("Student data updated for ID " +student.getId());
