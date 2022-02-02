@@ -66,7 +66,7 @@ public class StudentDaoImpl implements StudentDao {
 		
 		String UPDATE_STUDENT = "UPDATE student SET firstName = ? where id = ?";
 		
-		int status = jdbc.update(UPDATE_STUDENT,student.getFirstName());
+		int status = jdbc.update(UPDATE_STUDENT,student.getFirstName(),student.getId());
 		
 //		if(status!=0) {
 //			System.out.println("Student data updated for ID " +student.getId());
@@ -90,12 +90,16 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public int deleteStudentById(int id) {
+		
+		String DELETE_STUDENT = "DELETE from student where id =? ";
+		
+		int status = jdbc.update(DELETE_STUDENT, id);
 		// TODO Auto-generated method stub
 //		
 //		Student delStudent = getStudentById(id);
 //		students.remove(delStudent);
 		
-		return 0;
+		return status;
   }
 	 public class StudentMapper implements RowMapper<Student> {
 	        public Student mapRow(ResultSet rs, int rowNum) throws SQLException { 
